@@ -62,6 +62,10 @@ Yg = function (e) {
     }(unescape(encodeURIComponent(e)))
 }
 
+function y(e) {
+    return e && "undefined" != typeof Symbol && e.constructor === Symbol ? "symbol" : typeof e
+}
+
 class Constructor_e_A_A extends _g {
     constructor() {
         var A = super();
@@ -78,7 +82,7 @@ class Constructor_e_A_A extends _g {
     _append(e) {
         // var A = t;
         var i = e;
-        'string' == (void 0 === i ? "undefined" : y(i)) && (i = Yg(i)),
+        'string' === (void 0 === i ? "undefined" : y(i)) && (i = Yg(i)),
             this['_data']['concat'](i),
             this['_nDataBytes'] += i.sigBytes
     }
