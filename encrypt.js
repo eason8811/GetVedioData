@@ -1,4 +1,49 @@
 // cKey, encryptVer
+function Js(e) {
+    var t = e || 10
+        , A = (+new Date).toString();
+    return A.length > t ? A.substring(0, t) : "00000000000".concat(A).slice(-1 * t)
+}
+
+function xg(t, A) {
+    // var i = Il;
+    return new Constructor_e(A)['finalize'](t)
+}
+
+function Constructor_e() {
+    return null !== Constructor_e_A && Constructor_e_A["apply"](this, arguments) || this
+}
+
+function Constructor_e_A(t) {
+    // var A = Il;
+    var i = Constructor_e_A_A.call(this) || this;
+    return i["blockSize"] = 16,
+        i["cfg"] = Object["assign"](new _g, t),
+        i["reset"](),
+        i
+}
+
+function _g() {
+}
+
+_g.prototype['clone'] = function () {
+    // var t = e;
+    var A = new (this['constructor']);
+    return Object['assign'](A, this),
+        A
+}
+
+_g.prototype['miXIn'] = function (t) {
+    return Object['assign'](this, t)
+}
+
+function Constructor_e_A_A() {
+    // var t = Il;
+    var A = _g["call"](this) || this;
+    return A["_minBufferSize"] = 0,
+        A
+}
+
 function Cl(t) {
     var A = t.vid
         , i = t.updateTimeStamp
@@ -8,9 +53,9 @@ function Cl(t) {
         , a = t.h38
         , s = "".concat(i) || Js()
         , g = function (e) {
-        var t = fg
-            , A = function (e) {
-            var t = Il;
+        // var t = fg;
+        var A = function (e) {
+            // var t = Il;
             void 0 === e && (e = 32);
             for (var A = 'ABCEFGHIJKLNOPQRSTVWXYZabcefgijklmnpqrsuvwxz0124679', i = "", o = 0; o < e; o += 1)
                 i += A['charAt'](Math['floor'](Math['random']() * A['length']));
@@ -60,4 +105,15 @@ function Cl(t) {
         encryptVer: e.CKEY_VRE.CKEY_8
     }
 }
+
+let vid = "v41002y7xzo";
+let info = {
+    "vid": vid,
+    "updateTimeStamp": "",
+    "platform": "10201",
+    "guid": "8709258bf84da109",
+    "appVer": "1.35.15",
+    "h38": "716d603468ad773dd80217800200000cb18a12"
+};
+let cKey_8 = Cl(info);
 
