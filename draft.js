@@ -74,7 +74,7 @@ class Constructor_e_A_A extends _g {
     }
 
     reset() {
-        var e = Il;
+        // var e = Il;
         this['_data'] = new Mg,
             this['_nDataBytes'] = 0
     }
@@ -128,9 +128,9 @@ class Constructor_e_A extends Constructor_e_A_A {
     }
 
     reset() {
-        var A = t;
-        e[A(589) + "pe"][A(642)].call(this),
-            this[A(568) + "t"]()
+        // var A = t;
+        Constructor_e_A_A['prototype']['reset'].call(this),
+            this['_doReset']()
     }
 
     update(e) {
