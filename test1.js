@@ -6485,7 +6485,7 @@ var SuperPlayerExport = function (e) {
                 i
         }
 
-        return r(s, [{
+        return window.hyj_e = r(s, [{
             key: "triggerAutoplay",
             value: function () {
                 var e = this;
@@ -7283,6 +7283,7 @@ var SuperPlayerExport = function (e) {
         }]),
             s
     }(Ee);
+    console.log(Ee);
     F([to, D("design:type", Function), D("design:paramtypes", [void 0 === cA ? Object : cA]), D("design:returntype", void 0)], Ao.prototype, "pause", null),
         F([to, D("design:type", Function), D("design:paramtypes", []), D("design:returntype", void 0)], Ao.prototype, "stop", null),
         F([to, D("design:type", Function), D("design:paramtypes", []), D("design:returntype", void 0)], Ao.prototype, "destroy", null),
