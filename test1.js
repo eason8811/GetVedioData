@@ -3,7 +3,7 @@ let buffer = new Uint8Array(array).buffer;
 
 
 function get$2o() {
-    let A = window, e = 77807, s = [null, null, 0.5], t = [];
+    let A = global, e = 77807, s = [null, null, 0.5], t = [];
     let i = require('./$2o_i.js')
     return function l() {
         for (var u, c, B, E, d = [A, s, t, this, arguments, l, i, 0], p = void 0, h = e, I = []; ;)
@@ -348,7 +348,7 @@ function get$2o() {
 }
 
 function getJ4$() {
-    let A = window, e = 62080, s = [null, null, 0.5], t = [];
+    let A = global, e = 62080, s = [null, null, 0.5], t = [];
     let i = require('./J4$_i.js');
     return function l() {
         for (var u, c, B, E, d = [A, s, t, this, arguments, l, i, 0], p = void 0, h = e, I = []; ;)
@@ -693,7 +693,7 @@ function getJ4$() {
 }
 
 function getrsw() {
-    let A = window, e = 22097, s = [null, null, 0.5], t = [];
+    let A = global, e = 22097, s = [null, null, 0.5], t = [];
     let i = require('./rsw_i.js');
     return function l() {
         for (var u, c, B, E, d = [A, s, t, this, arguments, l, i, 0], p = void 0, h = e, I = []; ;)
@@ -1038,7 +1038,7 @@ function getrsw() {
 }
 
 function gettCr() {
-    let A = window, e = 12507, s = [null, null, 0.5], t = [];
+    let A = global, e = 12507, s = [null, null, 0.5], t = [];
     let i = require('./tCr_i.js');
     return function l() {
         for (var u, c, B, E, d = [A, s, t, this, arguments, l, i, 0], p = void 0, h = e, I = []; ;)
@@ -1383,7 +1383,7 @@ function gettCr() {
 }
 
 function get__EM_CXA_THROW__() {
-    let A = window, e = 42335, s = [null, null, 0.5], t = [];
+    let A = global, e = 42335, s = [null, null, 0.5], t = [];
     let i = require('./__EM_CXA_THROW__i.js');
     return function l() {
         for (var u, c, B, E, d = [A, s, t, this, arguments, l, i, 0], p = void 0, h = e, I = []; ;)
@@ -1739,4 +1739,7 @@ let obj = {
 
 console.log(buffer);
 let result = WebAssembly.instantiate(buffer, obj)
-result.then(result => console.log(result))
+result.then(result => {
+    console.log(result);
+    debugger;
+})
