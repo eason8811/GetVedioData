@@ -1,10 +1,10 @@
 let array = require('./codeArray.js');
 let buffer = new Uint8Array(array).buffer;
-
+window = global;
 
 function get$2o() {
-    let A = global, e = 77807, s = [null, null, 0.5], t = [];
-    let i = require('./$2o_i.js')
+    let A = window, e = 77807, s = [null, null, 0.5], t = [];
+    let i = require('./import_func_controller/$2o_i.js')
     return function l() {
         for (var u, c, B, E, d = [A, s, t, this, arguments, l, i, 0], p = void 0, h = e, I = []; ;)
             try {
@@ -348,8 +348,8 @@ function get$2o() {
 }
 
 function getJ4$() {
-    let A = global, e = 62080, s = [null, null, 0.5], t = [];
-    let i = require('./J4$_i.js');
+    let A = window, e = 62080, s = [null, null, 0.5], t = [];
+    let i = require('./import_func_controller/J4$_i.js');
     return function l() {
         for (var u, c, B, E, d = [A, s, t, this, arguments, l, i, 0], p = void 0, h = e, I = []; ;)
             try {
@@ -693,8 +693,8 @@ function getJ4$() {
 }
 
 function getrsw() {
-    let A = global, e = 22097, s = [null, null, 0.5], t = [];
-    let i = require('./rsw_i.js');
+    let A = window, e = 22097, s = [null, null, 0.5], t = [];
+    let i = require('./import_func_controller/rsw_i.js');
     return function l() {
         for (var u, c, B, E, d = [A, s, t, this, arguments, l, i, 0], p = void 0, h = e, I = []; ;)
             try {
@@ -1038,8 +1038,8 @@ function getrsw() {
 }
 
 function gettCr() {
-    let A = global, e = 12507, s = [null, null, 0.5], t = [];
-    let i = require('./tCr_i.js');
+    let A = window, e = 12507, s = [null, null, 0.5], t = [];
+    let i = require('./import_func_controller/tCr_i.js');
     return function l() {
         for (var u, c, B, E, d = [A, s, t, this, arguments, l, i, 0], p = void 0, h = e, I = []; ;)
             try {
@@ -1384,7 +1384,7 @@ function gettCr() {
 
 function get__EM_CXA_THROW__() {
     let A = global, e = 42335, s = [null, null, 0.5], t = [];
-    let i = require('./__EM_CXA_THROW__i.js');
+    let i = require('./import_func_controller/__EM_CXA_THROW__i.js');
     return function l() {
         for (var u, c, B, E, d = [A, s, t, this, arguments, l, i, 0], p = void 0, h = e, I = []; ;)
             try {
@@ -1738,8 +1738,63 @@ let obj = {
 }
 
 console.log(buffer);
-let result = WebAssembly.instantiate(buffer, obj)
-result.then(result => {
-    console.log(result);
-    debugger;
-})
+WebAssembly.instantiate(buffer, obj).then(getResult);
+
+
+function fromUint8Array(e) {
+    for (var t = new Uint8Array(e), A = t.byteLength, i = "", o = 0; o < A;) {
+        var n = t[o++];
+        if (128 & n)
+            if (192 == (224 & n))
+                i += String.fromCharCode((31 & n) << 6 | 63 & t[o++]);
+            else if (224 == (240 & n))
+                i += String.fromCharCode((15 & n) << 12 | (63 & t[o++]) << 6 | 63 & t[o++]);
+            else {
+                var r = (7 & n) << 18 | (63 & t[o++]) << 12 | (63 & t[o++]) << 6 | 63 & t[o++];
+                i += String.fromCharCode(55296 | r - 65536 >> 10, 56320 | r - 65536 & 1023)
+            }
+        else
+            i += String.fromCharCode(n)
+    }
+    return i
+}
+
+function toUint8Array(e) {
+    for (var t = [], A = 0; A < e.length; A += 1) {
+        var i = e.charCodeAt(A);
+        i < 128 ? t.push(i) : i < 2048 ? t.push(192 | i >> 6, 128 | 63 & i) : i < 55296 || i >= 57344 ? t.push(224 | i >> 12, 128 | i >> 6 & 63, 128 | 63 & i) : (A += 1,
+            i = 65536 + ((1023 & i) << 10 | 1023 & e.charCodeAt(A)),
+            t.push(240 | i >> 18, 128 | i >> 12 & 63, 128 | i >> 6 & 63, 128 | 63 & i))
+    }
+    return new Uint8Array(t)
+}
+
+function getResult(result) {
+    console.log(result.instance.exports);
+    let big_array = result.instance.exports.U9k;
+    let params = [
+        "1.36.3",
+        "v41002y7xzo",
+        "",
+        "6ff5b6a91b9aa8f1",
+        "https://v.qq.com/x/cover/mzc002000y0ehh8/v41002y|mozilla/5.0 (windows nt 10.0; win64; x64) applew||Mozilla|Netscape|Win32",
+        '{"csal":["9x7k6uc7xw","m5h0zchrh5"]}',
+        '{"ea":3,"spa":1,"prl":1}',
+        "d70ec5886c7ed7550a748c8d0200000d818c0d"
+    ];
+    let params_uint8 = params.map((item) => {
+        toUint8Array(item)
+    });
+    console.log(params_uint8);
+    let length_array = [14, 19, 0, 0, 0, 0, 0, 0];
+    let _0Yi = result.instance.exports['0Yi'];
+    let array = [];
+    for (let i = 0; i < 8; i++) {
+        array.push(_0Yi.call(result.instance.exports, length_array));
+    }
+    console.log(array);
+}
+// 152-128 = 24 (11+8 = 19, 24-19 = 5)
+// 176-152 = 24 (0+8  = 8 , 24-8  = 16)
+// 192-176 = 16 (16+8 = 24, 16-24 = -8)
+// 224-192 = 32 (121+8 = 129,32)
