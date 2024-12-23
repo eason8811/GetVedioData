@@ -2520,7 +2520,7 @@ function getResult(result) {
     // 视频信息
     let platform = '10201';
     let tm = (Math.floor(Date.now() / 1000)).toString();
-    tm = '1734507469';
+    tm = '1734929968';
     let params = [
         "1.36.3",
         "v41002y7xzo",
