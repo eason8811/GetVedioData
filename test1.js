@@ -2134,6 +2134,7 @@ let obj = {
 }
 
 console.log(obj);
+
 // WebAssembly.instantiate(buffer, obj).then(getResult);
 
 
@@ -2165,7 +2166,7 @@ function toUint8Array(e) {
     return new Uint8Array(t)
 }
 
-function getResult(result) {
+function getResult(result, request_param) {
 
     // 导出的函数集合
     let exports_obj = result.exports;
@@ -2176,18 +2177,19 @@ function getResult(result) {
     let Uint8_big_array = new Uint8Array(big_array.buffer);
 
     // 视频信息
-    let platform = '10201';
+    let platform = request_param["platform"];
     let tm = (Math.floor(Date.now() / 1000)).toString();
     // tm = '1735096163';
     let params = [
-        "1.37.2",
-        "v41002y7xzo",
+        request_param["appVer"],
+        request_param["vid"],
         "",
-        "6ff5b6a91b9aa8f1",
-        "https://v.qq.com/x/cover/mzc002000y0ehh8/v41002y|mozilla/5.0 (windows nt 10.0; win64; x64) applew||Mozilla|Netscape|Win32",
+        request_param["guid"],
+      // https://v.qq.com/x/cover/mzc002000y0ehh8/v41002y7xzo.html 取前 48 位
+        `${request_param["host"].slice(0, 48)}|mozilla/5.0 (windows nt 10.0; win64; x64) applew||Mozilla|Netscape|Win32`,
         '{"csal":["9x7k6uc7xw","m5h0zchrh5"]}',
         '{"ea":3,"spa":1,"prl":1}',
-        "d70ec5886c7ed7550a748c8d0200000d818c0d"
+        "d70ec5886c7ed7550a748c8d0200000d818c0d"  // h38
     ];
 
     // 将视频信息转换为Uint8Array
@@ -2581,49 +2583,77 @@ function getResult(result) {
     return cKey;
 }
 
-let request_param = {
-    "charge": 0,
-    "otype": "json",
-    "defnpayver": 3,
-    "spau": 1,
-    "spaudio": 0,
-    "spwm": 1,
-    "sphls": 2,
-    "host": "v.qq.com",
-    "refer": "https://v.qq.com/x/cover/mzc002000y0ehh8/v41002y7xzo.html",
-    "ehost": "https://v.qq.com/x/cover/mzc002000y0ehh8/v41002y7xzo.html",
-    "sphttps": 1,
-    "encryptVer": "8.5",
-    "cKey": "--01996EC2DB28C86C3933CC882ED632421E90406836E4A8418E9B487546747D818C54F159AA5E8BE6482FFDB1CDAD71C4AAA0D953E08AAEFC587537F8EA15278DB1206D9591B0CF247BCCE788A3DC2A9CEA86FF1C85F84D55FE974F7A8986A88F69F95353FC4E32CF268A36805B831869A105430958067BEBCA7E655EFDD201F7FDFCFA5E0B58CFD993994D9C62E17E150D4AA7CC8C5C50A4E9662EFD25C163943096D4D4ECDB2B9AD3E9F59CAE283335326007DFA0E5FE126AEE27C1C9FB9B3F00E67D98EC9A76FD6D473D512090C49A3E1F9ACD07F8EC4BA5BC29B02EC65FBD17D3D873680859D515130A7B37411AFCE6",
-    "clip": 4,
-    "guid": "6ff5b6a91b9aa8f1",
-    "flowid": "f808d66dd19431b49329b2b3d9aaad0b",
-    "platform": "10201",
-    "sdtfrom": "v1010",
-    "appVer": "1.37.2",
-    "unid": "",
-    "auth_from": "",
-    "auth_ext": "",
-    "vid": "v41002y7xzo",
-    "defn": "",
-    "fhdswitch": 0,
-    "dtype": 3,
-    "spsrt": 2,
-    "tm": (Math.floor(Date.now() / 1000)).toString(),
-    "lang_code": 0,
-    "logintoken": "",
-    "spvvpay": 1,
-    "spadseg": 3,
-    "spvvc": 3,
-    "spav1": 15,
-    "hevclv": 28,
-    "spsfrhdr": 0,
-    "spvideo": 0,
-    "spm3u8tag": 67,
-    "spmasterm3u8": 3,
-    "srccontenid": "q4100ob6gms",
+// 传入request_param 返回字符串化的param
+function he(e) {
+    var t = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "&"
+        , A = !(arguments.length > 2 && void 0 !== arguments[2]) || arguments[2];
+    if (!e)
+        return "";
+    var i = Object.keys(e);
+    if (i.length <= 0)
+        return "";
+    var o = [];
+    return i.forEach((function (t) {
+            var i = "";
+            i = A ? "".concat(encodeURIComponent(t), "=").concat(encodeURIComponent(e[t])) : "".concat(t, "=").concat(e[t]),
+                o.push(i)
+        }
+    )),
+        o.join(t)
 }
-let cKey = getResult(new WebAssembly.Instance(new WebAssembly.Module(buffer), obj))
+
+
+function main(vid, appVer, srccontenid) {
+    let request_param = {
+        "charge": 0,
+        "otype": "ojson",
+        "defnpayver": 3,
+        "spau": 1,
+        "spaudio": 0,
+        "spwm": 1,
+        "sphls": 2,
+        "host": "v.qq.com",
+        "refer": `https://v.qq.com/x/cover/mzc002000y0ehh8/${vid}.html`,
+        "ehost": `https://v.qq.com/x/cover/mzc002000y0ehh8/${vid}.html`,
+        "sphttps": 1,
+        "encryptVer": "9.2",
+        "cKey": "",
+        "clip": 4,
+        "guid": "6ff5b6a91b9aa8f1",
+        "flowid": "f808d66dd19431b49329b2b3d9aaad0b",
+        "platform": "10201",
+        "sdtfrom": "v1010",
+        "appVer": appVer,
+        "unid": "",
+        "auth_from": "",
+        "auth_ext": "",
+        "vid": vid,
+        "defn": "",
+        "fhdswitch": 0,
+        "dtype": 3,
+        "spsrt": 2,
+        "tm": (Math.floor(Date.now() / 1000)).toString(),
+        "lang_code": 0,
+        "logintoken": "",
+        "spvvpay": 1,
+        "spadseg": 3,
+        "spvvc": 3,
+        "spav1": 15,
+        "hevclv": 28,
+        "spsfrhdr": 0,
+        "spvideo": 0,
+        "spm3u8tag": 67,
+        "spmasterm3u8": 3,
+        "srccontenid": srccontenid,
+        'drm': 296
+    };
+    let cKey = getResult(new WebAssembly.Instance(new WebAssembly.Module(buffer), obj), request_param);
+    let stringfy_request_param = he(request_param);
+    console.log(stringfy_request_param);
+    return stringfy_request_param;
+}
+
+main('v41002y7xzo', '1.37.2', 'q4100ob6gms');
 
 // npx browserify D:\GetVedioData\test1.js -o D:\GetVedioData\index_html.js
 // 1735096818259
