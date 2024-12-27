@@ -93175,7 +93175,7 @@ function getResult(result) {
     console.log(exports_obj['7gd'](...index_array));
 }
 
-// npx browserify D:\GetVedioData\test1.js -o D:\GetVedioData\index_html.js
+// npx browserify D:\GetVedioData\cKeyEncryptV9-2.js -o D:\GetVedioData\index_html.js
 
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})

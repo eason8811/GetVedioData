@@ -2648,13 +2648,17 @@ function main(vid, appVer, srccontenid) {
         'drm': 296
     };
     let cKey = getResult(new WebAssembly.Instance(new WebAssembly.Module(buffer), obj), request_param);
+    request_param['cKey'] = cKey;
     let stringfy_request_param = he(request_param);
     console.log(stringfy_request_param);
-    return stringfy_request_param;
+    return {
+        'buid': 'onlyvinfo',
+        'vinfoparam': stringfy_request_param
+    };
 }
 
 main('v41002y7xzo', '1.37.2', 'q4100ob6gms');
 
-// npx browserify D:\GetVedioData\test1.js -o D:\GetVedioData\index_html.js
+// npx browserify D:\GetVedioData\cKeyEncryptV9-2.js -o D:\GetVedioData\index_html.js
 // 1735096818259
 
