@@ -2578,7 +2578,7 @@ function getResult(result, request_param) {
     }
 
     let after_7gd = get_after_7gd_func();
-    let cKey = after_7gd(result_7gd).split('|')[0];
+    let cKey = after_7gd(result_7gd).split('|')[1];
     console.log(cKey);
     return cKey;
 }
@@ -2652,9 +2652,7 @@ function main(vid, appVer, srccontenid) {
     let stringfy_request_param = he(request_param);
     console.log(stringfy_request_param);
     return {
-        'buid': 'vinfoad',
-        'sspAdParam': '{"ad_scene":1,"pre_ad_params":{"ad_scene":1,"user_type":0,"video":{"base":{"vid":"v41002y7xzo","cid":"mzc002000y0ehh8"},"is_live":false,"type_id":2,"referer":"","url":"https://v.qq.com/x/cover/mzc002000y0ehh8/v41002y7xzo.html?start=1819&cut_vid=q4100ob6gms&scene_id=3","flow_id":"ceab93f0c39b1bda40074e55ecac9ef9","refresh_id":"","fmt":"hd"},"platform":{"guid":"6ff5b6a91b9aa8f1","channel_id":0,"site":"web","platform":"in","from":0,"device":"pc","play_platform":10201,"pv_tag":"","support_click_scan_integration":true},"player":{"version":"1.37.1","plugin":"4.1.23","switch":1,"play_type":"0"},"token":{"type":0,"vuid":0,"vuser_session":"","app_id":"","open_id":"","access_token":""},"req_extra_info":{"now_timestamp_s":1735524084,"ad_frequency_control_time_list":{}},"extra_info":{}}}',
-        'adParam': 'adType=preAd&vid=v41002y7xzo&sspKey=gihh',
+        'buid': 'onlyvinfo',
         'vinfoparam': stringfy_request_param
     };
 }
