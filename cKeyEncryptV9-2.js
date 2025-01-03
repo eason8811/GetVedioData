@@ -1,6 +1,6 @@
 let array = require('./codeArray.js');
 let key_short = 'dGVuY2VudC12aWRlbw==';
-let key_long = 'A1U5awIAA2w2ZQA8AzdnZABhA3o2NgAMAzY1cwBcA3ZvegAhA0dGUgEAAzBZaQAGA2hOYQAZA3ZrNAAKA2syNAAJA3ZlMAAXA3piNgBDA0NBMgAbA3l3WgA/A1JSYgAE'
+let key_long = 'A1U5awIAA2w2ZQA8AzdnZABhA3o2NgAMAzY1cwBcA3ZvegAhA0dGUgEAAzBZaQAGA2hOYQAZA3ZrNAAKA2syNAAJA3ZlMAAXA3piNgBDA0NBMgAbA3l3WgA/A1JSYgAE';
 let global_v = [];
 
 let Uint8Array_util = {
@@ -2192,6 +2192,17 @@ function getResult(result, request_param) {
         "d70ec5886c7ed7550a748c8d0200000d818c0d"  // h38
     ];
 
+    /*let params = [
+        request_param["appVer"],
+        request_param["vid"],
+        request_param["guid"],
+        platform,
+        "d70ec5886c7ed7550a748c8d0200000d818c0d",  // h38
+        tm,
+        {},
+        {'prl': 1}
+    ];*/
+
     // 将视频信息转换为Uint8Array
     let params_uint8 = params.map(item => toUint8Array(item));
     console.log(params_uint8);
@@ -2645,7 +2656,8 @@ function main(vid, appVer, srccontenid) {
         "spm3u8tag": 67,
         "spmasterm3u8": 3,
         "srccontenid": srccontenid,
-        'drm': 296
+        'drm': 296,
+        'track': void 0,
     };
     let cKey = getResult(new WebAssembly.Instance(new WebAssembly.Module(buffer), obj), request_param);
     request_param['cKey'] = cKey;
